@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Declaración de objetos literales</title>
+  <link rel="stylesheet" href="Style.css">
+</head>
+
+<body>
+  <p>Define una clase que permita crear objetos de tipo banco con las siguientes características:
+    (6) Un atributo nombre que pasaremos como parámetro al crear el objetos.(0.25 pto)
+
+    El objeto permitirá gestionar cuentas (de 5 dígitos del 000001 al 599999) y el saldo de las cuentas, para lo que
+    utilizaremos los siguientes métodos:
+    (7) Crear cuenta: Recibe como parámetros el código de cuenta y el saldo inicial (por defecto tomará el valor 0 si no
+    se pasa el parámetro).
+    (8) Actualizar cuenta: Recibe como parámetros el código de cuenta y el ingreso (o extracción en negativo) y
+    actualiza el saldo de la cuenta. Mostrará error si la cuenta no existe.
+    (9) Eliminar cuenta: Recibe como parámetro el código de cuenta y la elimina. Mostrará error si la cuenta no existe o
+    si no tiene saldo 0, indicando cada caso.
+    (10) Listar cuentas: Escribe en el documento el nombre del banco y la lista de cuentas con sus saldos de forma
+    similar a la mostrada en la imagen siguiente.
+    Realiza 3 llamadas al método para crear cuentas, y una llamada a cada uno de los otros métodos para demostrar su
+    funcionamiento..
+  </p>
+
+  <div id="resultado"></div>
+
+  <script>
+    class Banco {
+      constructor(nombre) {
+        this.nombre = nombre; // (6) atributo nmbre del banco
+        this.cuentas = {};  // objeto para almacenar las cuentas y sus saldos
+      }
+
+
+      //(7) Método para crear cuenta
+      crearCuenta(codigo, saldoInicial = 0) {
+        if (this.cuentas[codigo]) {
+          console.error("La cuenta ya existe.");
+        } else {
+          this.cuentas[codigo] = saldoInicial;
+          console.log(`Cuenta ${codigo} creada con saldo inicial de ${saldoInicial} €.`);
+        }
+      }
+
+      actualizarCuenta(codigo, ingreso) {
+        if (this.cuentas[codigo] === undefined) {
+          console.error("La cuenta no existe.");
+        } else {
+          this.cuentas[codigo] += ingreso;
+          console.log(`Cuenta ${codigo} actualizada. Nuevo saldo: ${this.cuentas[codigo].toFixed(2)} €.`);
+        }
+      }
+
+      eliminarCuenta(codigo) {
+        if (this.cuentas[codigo] === undefined) {
+          console.error("La cuenta no existe.");
+        } else if (Number(this.cuentas[codigo]) !== 0) {
+          console.error("La cuenta no puede eliminarse si tiene saldo distinto de 0.");
+        } else {
+          delete this.cuentas[codigo];
+        }
+      }
+
+      listarCuentas() {
+        const salida = document.getElementById("resultado");
+        salida.innerHTML += `<h2>Cuentas del banco: ${this.nombre}</h2>`;
+        for (let codigo in this.cuentas) {
+          salida.innerHTML += `<p>Cuenta ${codigo}: ${this.cuentas[codigo].toFixed(2)} €</p>`;
+        }
+        salida.innerHTML += `<hr>`;
+      }
+    }
+
+
+    //campo de pruebas
+
+    let miBanco = new Banco("Banco Central Europeo");
+
+    //Creamos varias cuentas
+    miBanco.crearCuenta("000123", 1000); // Crear cuenta con saldo inicial
+    miBanco.crearCuenta("000456", 0); // Crear cuenta con saldo 0 por defecto  
+    miBanco.crearCuenta("000789", 500); // Crear otra cuenta
+
+    // Actualizamos una cuenta
+    miBanco.actualizarCuenta("000123", 250); // Ingreso de 250€
+    miBanco.actualizarCuenta("000789", -50); // Extracción de 50€
+
+    //Intentamos eliminar una cuenta con saldo distinto de 0
+    console.log("Intentamos eliminar cuenta con saldo 0");
+    miBanco.eliminarCuenta("000456"); // Debería mostrar error
+    console.log("Cuenta ${000456} saldo: " + miBanco.cuentas["000456"]);
+    console.log("Intentamos eliminar cuenta con saldo distinto de 0");
+    miBanco.eliminarCuenta("000123"); // Debería mostrar error
+    console.log("Cuenta ${000123} saldo: " + miBanco.cuentas["000123"]);
+
+
+    //Listamos las cuentas del banco
+    miBanco.listarCuentas("cuentas del banco en total");
+
+
+
+
+  </script>
+
+</body>
+
+</html>
