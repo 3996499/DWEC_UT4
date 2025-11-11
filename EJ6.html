@@ -9,6 +9,7 @@
 </head>
 
 <body>
+  <p>Ejercicio 2- Apartado 6-7-8-9-10</p>
   <p>Define una clase que permita crear objetos de tipo banco con las siguientes características:
     (6) Un atributo nombre que pasaremos como parámetro al crear el objetos.(0.25 pto)
 
@@ -45,7 +46,7 @@
           console.log(`Cuenta ${codigo} creada con saldo inicial de ${saldoInicial} €.`);
         }
       }
-
+      //(8) Método para actualizar cuenta
       actualizarCuenta(codigo, ingreso) {
         if (this.cuentas[codigo] === undefined) {
           console.error("La cuenta no existe.");
@@ -54,7 +55,7 @@
           console.log(`Cuenta ${codigo} actualizada. Nuevo saldo: ${this.cuentas[codigo].toFixed(2)} €.`);
         }
       }
-
+      //(9) Método para eliminar cuenta
       eliminarCuenta(codigo) {
         if (this.cuentas[codigo] === undefined) {
           console.error("La cuenta no existe.");
@@ -64,7 +65,7 @@
           delete this.cuentas[codigo];
         }
       }
-
+      //(10) Método para listar cuentas
       listarCuentas() {
         const salida = document.getElementById("resultado");
         salida.innerHTML += `<h2>Cuentas del banco: ${this.nombre}</h2>`;
@@ -75,7 +76,7 @@
       }
     }
 
-
+    
     //campo de pruebas
 
     let miBanco = new Banco("Banco Central Europeo");
@@ -105,7 +106,9 @@
 
 
   </script>
-
+<footer>
+    &copy; 2025 - Desarrollado por Carlos Melenchon | Módulo de DWEC | CIFP CARLOS III
+  </footer>
 </body>
 
 </html>

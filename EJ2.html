@@ -42,7 +42,7 @@ function normalizarDescripcion(articulos) {
     //recorremos todods los articulos y modificamos la descripcion
     articulos.forEach(articulo => {
         let texto = articulo.descripcion.trim(); // eliminamos espacios en blanco
-        articulo.descripcion = texto.charAt(0).toUpperCase() + texto.slice(1).toLowerCase(); // primera letra mayuscula y el resto minusculas
+        articulo.descripcion = texto.charAt(0).toUpperCase() + texto.slice(1).toLowerCase(); 
     });
     return articulos; //devolvemos el array modificado
 }
@@ -51,6 +51,9 @@ function normalizarDescripcion(articulos) {
 
         
     </script>
+    <footer>
+    &copy; 2025 - Desarrollado por Carlos Melenchon | Módulo de DWEC | CIFP CARLOS III
+  </footer>
 
 </body>
 </html>
